@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+
+    <parent>
+        <groupId>org.jboss.ejb3.container</groupId>
+        <artifactId>jboss-ejb3-container-build</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../build/pom.xml</relativePath>
+    </parent>
+    
+    <!-- Maven POM Model Version -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Artifact Information -->
+    <groupId>org.jboss.ejb3.container</groupId>
+    <artifactId>jboss-ejb3-container-spi</artifactId>
+    <name>JBoss EJB3 Container SPI</name>
+    <description>
+		JBoss EJB3 Container SPI
+	</description>
+    <url>http://www.jboss.org/jbossejb3/</url>
+
+    <!-- Properties -->
+    <properties>
+
+        <!-- Versioning -->
+        <version.org.jboss.metadata.ejb>2.0.0-alpha-5</version.org.jboss.metadata.ejb>
+    </properties>
+    
+    <!-- Dependencies -->
+
+    
+
+    <dependencies>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.6</version>
+        </dependency>
+
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.jboss.logging</groupId>
+            <artifactId>jboss-logging-spi</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.metadata</groupId>
+            <artifactId>jboss-metadata-ejb</artifactId>
+            <version>${version.org.jboss.metadata.ejb}</version>
+        </dependency>
+
+
+    </dependencies>
+</project>
