@@ -57,8 +57,9 @@ public interface EJBLifecycleHandler
     * </p>
     * @param beanContext The {@link BeanContext}, upon whose construction, this
     *       lifecycle method was invoked 
+    * @throws Exception If any exception occurs during processing the lifecycle event       
     */
-   void postConstruct(BeanContext beanContext);
+   void postConstruct(BeanContext beanContext) throws Exception;
 
    /**
     * Will be called before destroying a bean context.
@@ -73,8 +74,9 @@ public interface EJBLifecycleHandler
     * </p>
     * @param beanContext The {@link BeanContext}, before whose destruction, this
     *       lifecycle method was invoked 
+    * @throws Exception If any exception occurs during processing the lifecycle event       
     */
-   void preDestroy(BeanContext beanContext);
+   void preDestroy(BeanContext beanContext) throws Exception;
    
    
 }

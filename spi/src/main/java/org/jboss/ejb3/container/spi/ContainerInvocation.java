@@ -22,39 +22,45 @@
 package org.jboss.ejb3.container.spi;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 
 /**
- * StatefulEJBInstanceManager
- *
+ * ContainerInvocationContext
  * <p>
- * A {@link StatefulEJBInstanceManager} is responsible for creating/destroying 
- * stateful bean instances
+ * A {@link ContainerInvocation} represents an invocation to be processed by the {@link EJBContainer#invoke(ContainerInvocation)}
+ * method. The {@link ContainerInvocation} holds the information about the method being invoked (on the bean proxy) and the
+ * arguments being passed to the method. It also has other contextual information about the invocation.
  * </p>
- * @see EJBInstanceManager
+ *  
  * @author Jaikiran Pai
  * @version $Revision: $
  */
-public interface StatefulEJBInstanceManager extends EJBInstanceManager
+public interface ContainerInvocation
 {
-   /**
-    * Creates and returns a {@link BeanContext} corresponding to a 
-    * stateful session bean
-    * 
-    * @param initTypes The Class types of any init method corresponding to the stateful bean 
-    * @param initValues The params values to be passed to the init method corresponding to the
-    *                   stateful bean
-    * @return
-    */
-   BeanContext create(Class<?>[] initTypes, Object initValues[]);
 
    /**
-    * Returns the {@link BeanContext} corresponding to the passed <code>sessionId</code>
-    * @param sessionId The session id of the bean context being requested for
-    * @return
-    * @throws IllegalArgumentException If no bean context corresponding to the passed <code>sessionId</code>
-    *                               was found
+    * @return Returns the method being invoked
+    * 
     */
-   // TODO: Better (custom) exception to throw instead of IllegalArgumentException?
-   BeanContext get(Serializable sessionId) throws IllegalArgumentException;
+   Method getMethod();
+   
+   /**
+    * 
+    * @return Returns the arguments to be passed to the method being invoked
+    */
+   Object[] getArgs();
+   
+   /**
+    *  
+    * @return Returns the session id to which this invocation is associated with.
+    * If the invocation is on a stateless container then this method can return null.
+    */
+   Serializable getSessionId();
+   
+   /**
+    * TODO: Better javadoc (i'm sleepy right now!)
+    * @return Returns the {@link Class} on which the method has been invoked
+    */
+   Class<?> getInvokedBusinessInterface();
    
 }

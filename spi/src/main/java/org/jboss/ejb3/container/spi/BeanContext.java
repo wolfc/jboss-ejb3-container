@@ -21,6 +21,8 @@
 */
 package org.jboss.ejb3.container.spi;
 
+import java.io.Serializable;
+
 /**
  * BeanContext
  * <p>
@@ -32,6 +34,12 @@ package org.jboss.ejb3.container.spi;
 public interface BeanContext
 {
 
+   /**
+    * @return Returns the session id to which this {@link BeanContext}
+    * is associated.
+    */
+   Serializable getSessionId();
+   
    /**
     * Returns the bean instance
     * @return

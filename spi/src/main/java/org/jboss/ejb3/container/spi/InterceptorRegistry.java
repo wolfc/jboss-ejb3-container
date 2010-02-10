@@ -21,13 +21,18 @@
 */
 package org.jboss.ejb3.container.spi;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.ejb.PostActivate;
+import javax.ejb.PrePassivate;
+
 /**
  * InterceptorRegistry
  *
  * <p>
  * An {@link InterceptorRegistry} for a {@link EJBContainer} is responsible 
  * for applying any applicable interceptors to a target EJB instance during a 
- * {@link ContainerInvocationContext}. It's upto the implementations of the {@link InterceptorRegistry}
+ * {@link ContainerInvocation}. It's upto the implementations of the {@link InterceptorRegistry}
  * to get hold of the correct set of interceptors that need to be applied during the
  * invocation. 
  * </p>
@@ -50,11 +55,69 @@ public interface InterceptorRegistry
    EJBContainer getEJBContainer();
    
    /**
-    * Intercepts a {@link ContainerInvocationContext}.
+    * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
+    * {@link PostConstruct}.
+    * <p>
+    *   This method is even responsible for invoking any {@link PostConstruct} method on the 
+    *   target bean instance. Furthermore, this method is responsible for creating any
+    *   interceptor instances corresponding to the target bean instance.
+    * </p> 
+    * @param targetBeanContext The {@link BeanContext} which is being processed for the {@link PostConstruct}
+    *                           lifecycle
+    * @throws Exception If any exception was encountered during processing the {@link PostConstruct}
+    *                   for the <code>targetBeanContext</code>.
+    */
+   void invokePostConstruct(BeanContext targetBeanContext) throws Exception;
+
+   /**
+    * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
+    * {@link PreDestroy}.
+    * <p>
+    *   This method is even responsible for invoking any {@link PreDestroy} method on the 
+    *   target bean instance. Furthermore, this method is responsible for destroying any
+    *   interceptor instances corresponding to the target bean instance.
+    * </p> 
+    * @param targetBeanContext The {@link BeanContext} which is being processed for the {@link PreDestroy}
+    *                           lifecycle
+    * @throws Exception If any exception was encountered during processing the {@link PreDestroy}
+    *                   for the <code>targetBeanContext</code>.
+    */
+   void invokePreDestroy(BeanContext targetBeanContext) throws Exception;
+   
+   /**
+    * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
+    * {@link PrePassivate}.
+    * <p>
+    *   This method is even responsible for invoking any {@link PrePassivate} method on the 
+    *   target bean instance. 
+    * </p> 
+    * @param targetBeanContext The {@link BeanContext} which is being processed for the {@link PrePassivate}
+    *                           lifecycle
+    * @throws Exception If any exception was encountered during processing the {@link PrePassivate}
+    *                   for the <code>targetBeanContext</code>.
+    */
+   void invokePrePassivate(BeanContext targetBeanContext) throws Exception;
+   
+   /**
+    * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
+    * {@link PostActivate}.
+    * <p>
+    *   This method is even responsible for invoking any {@link PostActivate} method on the 
+    *   target bean instance. 
+    * </p> 
+    * @param targetBeanContext The {@link BeanContext} which is being processed for the {@link PostActivate}
+    *                           lifecycle
+    * @throws Exception If any exception was encountered during processing the {@link PostActivate}
+    *                   for the <code>targetBeanContext</code>.
+    */
+   void invokePostActivate(BeanContext targetBeanContext) throws Exception;
+   
+   /**
+    * Intercepts a {@link ContainerInvocation}.
     * <p>
     *   This method is responsible to applying any interceptors applicable for the 
     *   <code>targetBeanContext</code> object. The <code>targetBeanContext</code> holds the EJB instance
-    *   on which the {@link ContainerInvocationContext} is being done.    
+    *   on which the {@link ContainerInvocation} is being done.    
     * </p>
     * @param containerInvocation The container invocation
     * @param targetBeanContext The target bean context
@@ -62,6 +125,6 @@ public interface InterceptorRegistry
     * @throws Exception If any exception occurs during intercepting of the invocation on the 
     *               <code>target</code> object
     */
-   Object intercept(ContainerInvocationContext containerInvocation, BeanContext targetBeanContext) throws Exception;
+   Object intercept(ContainerInvocation containerInvocation, BeanContext targetBeanContext) throws Exception;
    
 }

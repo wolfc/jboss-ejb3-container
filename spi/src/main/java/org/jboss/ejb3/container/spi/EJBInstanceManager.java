@@ -21,6 +21,8 @@
 */
 package org.jboss.ejb3.container.spi;
 
+import java.io.Serializable;
+
 /**
  * EJBInstanceManager
  * <p>
@@ -35,17 +37,39 @@ public interface EJBInstanceManager
 {
 
    /**
-    * @return Creates and returns new {@link BeanContext}
+    * @return Creates and returns the session id associated with the newly created {@link BeanContext}.
+    *  If the instance manager corresponds to a stateless bean, then a NULL session id is returned
     * 
     */
-   BeanContext create();
+   Serializable create();
 
    /**
-    * Destroys an already created {@link BeanContext}
-    * @param beanContext The {@link BeanContext} to be destroyed
-    * @throws IllegalArgumentException If the <code>beanContext</code> doesn't exist
+    * Destroys an already created session.
+    * <p>
+    * This method is applicable only for an {@link EJBInstanceManager} which manages
+    * a stateful session bean instances. Use {@link #isSessionAware()}
+    * method to check whether this {@link EJBInstanceManager} corresponds to a 
+    * stateful session bean
+    * </p>
+    * 
+    * @param sessionId The session which needs to be destroyed
+    * @throws IllegalArgumentException If a {@link BeanContext} corresponding to the
+    *                 passed <code>sessionId</code> doesn't exist or if the passed
+    *                 <code>sessionId</code> is null
+    *                 
+    * @throws IllegalStateException If this {@link EJBInstanceManager} is not meant for
+    *                           stateful session beans. Use {@link #isSessionAware()}
+    *                           before calling this method, to check whether this {@link EJBInstanceManager}
+    *                           is for stateful session beans.                 
     */
-   void destroy(BeanContext beanContext) throws IllegalArgumentException;
+   void destroy(Serializable sessionId) throws IllegalArgumentException, IllegalStateException;
+   
+   /**
+    * @return Returns true if this {@link EJBInstanceManager} is responsible
+    * for managing instances of a stateful session bean. Else returns false  
+    * 
+    */
+   boolean isSessionAware();
 
    /**
     * @return Returns the {@link EJBContainer} to which this

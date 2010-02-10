@@ -21,7 +21,6 @@
 */
 package org.jboss.ejb3.container.spi;
 
-import org.jboss.ejb3.container.spi.lifecycle.EJBLifecycleHandler;
 import org.jboss.metadata.ejb.jboss.JBossEnterpriseBeanMetaData;
 
 /**
@@ -68,24 +67,18 @@ public interface EJBContainer
    EJBDeploymentInfo getDeploymentInfo();
    
    /**
-    * Uses the information in the passed {@link ContainerInvocationContext} to 
+    * Uses the information in the passed {@link ContainerInvocation} to 
     * invoke on the target object.
     * 
     * @param containerInvocation The container invocation
     * @return Returns the result of the invocation
     * @throws Exception If something fails during the invocation 
     */
-   Object invoke(ContainerInvocationContext containerInvocation) throws Exception;
+   Object invoke(ContainerInvocation containerInvocation) throws Exception;
    
    /**
     * @return Returns the {@link InterceptorRegistry} corresponding to this container.
     */
    InterceptorRegistry getInterceptorRegistry();
    
-   /**
-    * @return Returns the {@link EJBLifecycleHandler} which is responsible for handling the 
-    * lifecycle events (like PostConstruct, PreDestroy etc...) of a bean instance
-    * 
-    */
-   EJBLifecycleHandler getEJBLifecycleHandler();
 }

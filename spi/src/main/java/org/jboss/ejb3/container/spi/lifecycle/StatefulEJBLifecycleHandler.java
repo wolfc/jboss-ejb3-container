@@ -37,26 +37,6 @@ public interface StatefulEJBLifecycleHandler extends EJBLifecycleHandler
 {
 
    /**
-    *  Will be called upon construction of a bean context.
-    *  <p>
-    * Like the {@link EJBLifecycleHandler#postConstruct(BeanContext)} method, this 
-    * method is responsible for carrying out any appropriate actions on  
-    * creation of a stateful bean instance.
-    * </p> 
-    * <p>
-    * In addition to what the {@link EJBLifecycleHandler#postConstruct(BeanContext)} method
-    * is typically responsible for, this method invokes any init method on the stateful bean
-    * instance
-    * </p>
-    * @param beanContext The {@link BeanContext} on whose construction, this lifecycle callback
-    *                   method was invoked
-    * @param initTypes The Class types of any init method corresponding to the stateful bean 
-    * @param initValues The params values to be passed to the init method corresponding to the
-    *                   stateful bean
-    */
-   void postConstruct(BeanContext beanContext, Class<?>[] initTypes, Object initValues[]);
-   
-   /**
     * Will be called before a stateful {@link BeanContext} is passivated
     * <p>
     *  Typically, this lifecycle callback method is responsible for carrying out
