@@ -25,7 +25,6 @@ import org.jboss.ejb3.container.spi.BeanContext;
 import org.jboss.ejb3.container.spi.EJBInstanceManager;
 
 /**
- * EJBLifecycleHandler
  *
  * <p>
  * An {@link EJBLifecycleHandler} is responsible for handling lifecycle events 

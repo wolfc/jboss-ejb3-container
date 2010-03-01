@@ -24,7 +24,7 @@ package org.jboss.ejb3.container.spi.lifecycle;
 import org.jboss.ejb3.container.spi.BeanContext;
 
 /**
- * StatefulEJBLifecycleHandler
+ * 
  * <p>
  *  A {@link StatefulEJBLifecycleHandler} is responsible for handling lifecycle events
  *  of a stateful bean instance.

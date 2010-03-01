@@ -25,7 +25,6 @@ import java.io.Serializable;
 import java.lang.reflect.Method;
 
 /**
- * ContainerInvocationContext
  * <p>
  * A {@link ContainerInvocation} represents an invocation to be processed by the {@link EJBContainer#invoke(ContainerInvocation)}
  * method. The {@link ContainerInvocation} holds the information about the method being invoked (on the bean proxy) and the

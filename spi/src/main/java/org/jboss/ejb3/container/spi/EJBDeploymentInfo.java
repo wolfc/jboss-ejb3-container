@@ -24,8 +24,7 @@ package org.jboss.ejb3.container.spi;
 import java.net.URL;
 
 /**
- * EJBDeploymentInfo
- * 
+ *
  * Provides various deployment related information of a EJB deployment  
  *
  * TODO: This one needs more thinking

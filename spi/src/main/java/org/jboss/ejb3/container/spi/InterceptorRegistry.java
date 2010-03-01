@@ -21,14 +21,16 @@
 */
 package org.jboss.ejb3.container.spi;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
+import javax.interceptor.Interceptors;
 
 /**
- * InterceptorRegistry
- *
+ * 
  * <p>
  * An {@link InterceptorRegistry} for a {@link EJBContainer} is responsible 
  * for applying any applicable interceptors to a target EJB instance during a 
@@ -126,5 +128,26 @@ public interface InterceptorRegistry
     *               <code>target</code> object
     */
    Object intercept(ContainerInvocation containerInvocation, BeanContext targetBeanContext) throws Exception;
+   
+   /**
+    * Returns a ordered list of interceptor classes which are applicable for the bean
+    * represented by this {@link InterceptorRegistry}. Returns an empty list if no such
+    * interceptors exist.
+    * <p>
+    *  Typically, this ordered list consists of:
+    *  <ul>
+    *    <li>Default interceptors for the bean</li>
+    *    <li>Class level interceptors for the bean</li>
+    *    <li>Method level interceptors for the bean</li>
+    *   </ul>
+    * </p>
+    * <p>
+    *  Typically, the interceptors for a bean are specified through the use of {@link Interceptors} annotation
+    *  on the bean or its xml equivalent. But it may *not* be limited to only such interceptors. Implementations
+    *  of {@link InterceptorRegistry} are free to return any other interceptor class(es) too.
+    * </p>
+    * @return
+    */
+   List<Class<?>> getInterceptorClasses();
    
 }

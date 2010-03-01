@@ -24,7 +24,6 @@ package org.jboss.ejb3.container.spi;
 import java.io.Serializable;
 
 /**
- * EJBInstanceManager
  * <p>
  *  An {@link EJBInstanceManager} is responsible for creating/destroying bean
  *  instances.

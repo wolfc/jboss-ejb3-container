@@ -24,7 +24,6 @@ package org.jboss.ejb3.container.spi;
 import org.jboss.metadata.ejb.jboss.JBossEnterpriseBeanMetaData;
 
 /**
- * EJBContainer
  * 
  * Responsible for providing the necessary runtime infrastructure
  * for EJB3 enterprise beans. TODO: Needs more javadoc 
