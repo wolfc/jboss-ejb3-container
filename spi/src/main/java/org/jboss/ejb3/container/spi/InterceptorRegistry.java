@@ -29,6 +29,8 @@ import javax.ejb.PostActivate;
 import javax.ejb.PrePassivate;
 import javax.interceptor.Interceptors;
 
+import org.jboss.ejb3.container.spi.injection.InstanceInjector;
+
 /**
  * 
  * <p>
@@ -55,7 +57,7 @@ public interface InterceptorRegistry
     * @return
     */
    EJBContainer getEJBContainer();
-   
+
    /**
     * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
     * {@link PostConstruct}.
@@ -85,7 +87,7 @@ public interface InterceptorRegistry
     *                   for the <code>targetBeanContext</code>.
     */
    void invokePreDestroy(BeanContext targetBeanContext) throws Exception;
-   
+
    /**
     * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
     * {@link PrePassivate}.
@@ -99,7 +101,7 @@ public interface InterceptorRegistry
     *                   for the <code>targetBeanContext</code>.
     */
    void invokePrePassivate(BeanContext targetBeanContext) throws Exception;
-   
+
    /**
     * Run the <code>targetBeanContext</code> against any applicable interceptor methods for
     * {@link PostActivate}.
@@ -113,7 +115,7 @@ public interface InterceptorRegistry
     *                   for the <code>targetBeanContext</code>.
     */
    void invokePostActivate(BeanContext targetBeanContext) throws Exception;
-   
+
    /**
     * Intercepts a {@link ContainerInvocation}.
     * <p>
@@ -128,7 +130,7 @@ public interface InterceptorRegistry
     *               <code>target</code> object
     */
    Object intercept(ContainerInvocation containerInvocation, BeanContext targetBeanContext) throws Exception;
-   
+
    /**
     * Returns a ordered list of interceptor classes which are applicable for the bean
     * represented by this {@link InterceptorRegistry}. Returns an empty list if no such
@@ -149,5 +151,9 @@ public interface InterceptorRegistry
     * @return
     */
    List<Class<?>> getInterceptorClasses();
-   
+
+   List<InstanceInjector> getInterceptorInjectors();
+
+   void setInterceptorInjectors(List<InstanceInjector> interceptorInjectors);
+
 }

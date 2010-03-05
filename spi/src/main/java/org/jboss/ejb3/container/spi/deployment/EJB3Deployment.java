@@ -92,4 +92,5 @@ public interface EJB3Deployment
     *                           this {@link EJB3Deployment}
     */
    void removeEJBContainer(EJBContainer ejbContainer) throws IllegalArgumentException;
+   
 }

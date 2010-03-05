@@ -21,6 +21,12 @@
 */
 package org.jboss.ejb3.container.spi;
 
+import java.util.List;
+
+import javax.naming.Context;
+
+import org.jboss.ejb3.container.spi.injection.EJBContainerENCInjector;
+import org.jboss.ejb3.container.spi.injection.InstanceInjector;
 import org.jboss.metadata.ejb.jboss.JBossEnterpriseBeanMetaData;
 
 /**
@@ -79,5 +85,27 @@ public interface EJBContainer
     * @return Returns the {@link InterceptorRegistry} corresponding to this container.
     */
    InterceptorRegistry getInterceptorRegistry();
+   
+   /**
+    * Returns the ENC context associated with this container
+    * @return
+    */
+   Context getENC();
+   
+   /**
+    * Returns the classloader associated with this container
+    * @return
+    */
+   ClassLoader getClassLoader();
+   
+   void setENCInjectors(List<EJBContainerENCInjector> encInjectors);
+   
+   List<EJBContainerENCInjector> getENCInjectors();
+   
+   void setEJBInjectors(List<InstanceInjector> injectors);
+   
+   List<InstanceInjector> getEJBInjectors();
+   
+  
    
 }
