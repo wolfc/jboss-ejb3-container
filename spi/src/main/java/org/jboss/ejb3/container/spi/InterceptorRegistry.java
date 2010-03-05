@@ -22,6 +22,7 @@
 package org.jboss.ejb3.container.spi;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -152,8 +153,8 @@ public interface InterceptorRegistry
     */
    List<Class<?>> getInterceptorClasses();
 
-   List<InstanceInjector> getInterceptorInjectors();
+   Map<Class<?>, List<InstanceInjector>> getInterceptorInjectors();
 
-   void setInterceptorInjectors(List<InstanceInjector> interceptorInjectors);
+   void setInterceptorInjectors(Map<Class<?>, List<InstanceInjector>> interceptorInjectors);
 
 }
